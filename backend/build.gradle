@@ -1,0 +1,41 @@
+/*
+ * Copyright (C) helloTRULY - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Krzysztof Czelusniak <krzysztof@czelusniak.com>, March 2015
+ */
+
+apply plugin: 'java'
+apply plugin: 'appengine'
+apply plugin: 'war'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.18'
+    }
+}
+
+dependencies {
+    compile 'com.google.appengine:appengine-endpoints:1.9.18'
+    compile 'com.google.appengine:appengine-endpoints-deps:1.9.18'
+    compile 'javax.servlet:servlet-api:2.5'
+    compile 'org.mindrot:jbcrypt:0.3m'
+    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.18'
+}
+
+appengine {
+    downloadSdk = true
+    appcfg {
+        oauth2 = true
+    }
+    endpoints {
+        getDiscoveryDocsOnBuild = true
+        getClientLibsOnBuild = true
+    }
+    update {
+        useJava7 = true
+    }
+}

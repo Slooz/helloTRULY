@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) helloTRULY - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Krzysztof Czelusniak <krzysztof@czelusniak.com>, March 2015
+  -->
+
+<manifest
+    package="com.hellotruly.app"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/launcher"
+        android:label="@string/applicationName">
+
+        <activity android:name=".PersistentSigninActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".RegistrationActivity"></activity>
+
+        <activity android:name=".SigninActivity"></activity>
+
+        <activity android:name=".HomeActivity"></activity>
+
+        <activity android:name=".YourIntroActivity"></activity>
+
+        <activity android:name=".YourHelloActivity"></activity>
+
+        <service android:name=".LocationService"></service>
+
+        <receiver android:name=".OnBootReceiver">
+            <intent-filter>
+                <action android:name="ANDROID.INTENT.ACTION.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

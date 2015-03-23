@@ -1,0 +1,55 @@
+/*
+ * Copyright (C) helloTRULY - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Krzysztof Czelusniak <krzysztof@czelusniak.com>, March 2015
+ */
+
+import com.android.build.gradle.internal.dsl.SigningConfig
+
+apply plugin: 'com.android.application'
+
+dependencies {
+    compile project(path: ':backend', configuration: 'android-endpoints')
+    compile 'com.google.android.gms:play-services-location:7.0.0'
+}
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion '22.0.1'
+    defaultConfig {
+        versionCode 1
+        versionName '0.0.0'
+        minSdkVersion 19
+        targetSdkVersion 22
+        applicationId 'com.hellotruly.hellotruly'
+        resConfigs "en"
+    }
+    signingConfigs {
+        release {
+            storeFile file('HelloTruly.keystore')
+            storePassword System.getenv('KEYSTORE_PASSWORD')
+            keyAlias 'HelloTruly'
+            keyPassword System.getenv('KEY_PASSWORD')
+        }
+    }
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+        }
+        release {
+            signingConfig signingConfigs.release as SigningConfig
+            minifyEnabled true
+            shrinkResources true
+            proguardFile getDefaultProguardFile('proguard-android-optimize.txt') as File
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    packagingOptions {
+        pickFirst 'META-INF/LICENSE.txt'
+        pickFirst 'META-INF/NOTICE.txt'
+    }
+}
